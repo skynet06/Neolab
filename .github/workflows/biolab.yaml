@@ -6,10 +6,10 @@ name: biolab
     workflow_dispatch: {}
 env:
     ACR_RESOURCE_GROUP: NeoCloud
-    AZURE_CONTAINER_REGISTRY: acrworkflow1681398705597
-    CLUSTER_NAME: NeoCloudKub
+    AZURE_CONTAINER_REGISTRY: acrworkflow1681468346273
+    CLUSTER_NAME: biolab
     CLUSTER_RESOURCE_GROUP: NeoCloud
-    CONTAINER_NAME: image-workflow-1681398705597
+    CONTAINER_NAME: image-workflow-1681468346273
     DEPLOYMENT_MANIFEST_PATH: |
         ./manifest.yml
 jobs:
@@ -27,7 +27,7 @@ jobs:
                 subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
                 tenant-id: ${{ secrets.AZURE_TENANT_ID }}
             - name: Build and push image to ACR
-              run: az acr build --image ${{ env.CONTAINER_NAME }}:${{ github.sha }} --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.ACR_RESOURCE_GROUP }} -f ./DockerFile ./DockerFile
+              run: az acr build --image ${{ env.CONTAINER_NAME }}:${{ github.sha }} --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.ACR_RESOURCE_GROUP }} -f ./DockerFile ./
     deploy:
         permissions:
             actions: read
@@ -61,4 +61,4 @@ jobs:
                 action: deploy
                 images: ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }}
                 manifests: ${{ env.DEPLOYMENT_MANIFEST_PATH }}
-                namespace: namespace-workflow-1681398705597
+                namespace: namespace-workflow-1681468346273
