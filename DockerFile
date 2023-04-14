@@ -1,5 +1,4 @@
-FROM node:16-alpine3.14
-WORKDIR /app
-COPY . /app
-RUN npm ci --only=production && npm cache clean --force
+FROM nginx
+WORKDIR /usr/share/nginx
+COPY index.html /usr/share/nginx/html
 EXPOSE 8081
