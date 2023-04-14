@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: "neocloudkub-dac4"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: "neocloudkub-dac4"
+  template:
+    metadata:
+      labels:
+        app: "neocloudkub-dac4"
+    spec:
+      containers:
+        - name: "neocloudkub-dac4"
+          image: "containerradm.azurecr.io/neocloudkub"
+          ports:
+          - containerPort: 8081
